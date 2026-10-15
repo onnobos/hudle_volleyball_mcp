@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hudl-volleyball-mcp"
+version = "0.1.0"
+description = "Production-ready Model Context Protocol (MCP) server for Hudl and Balltime volleyball analytics"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Hudl Volleyball MCP Team" }
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    "mcp>=1.3.0,<2.0.0",
+    "httpx>=0.27.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "playwright>=1.40.0",
+    "diskcache>=5.6.3",
+    "platformdirs>=4.0.0",
+    "keyring>=24.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "hatchling>=1.20.0",
+]
+
+[project.scripts]
+hudl-volleyball-mcp = "hudl_mcp.server:main"
+mcp-hudl-volleyball = "hudl_mcp.server:main"
+hudl-mcp = "hudl_mcp.server:main"
+hudl-auth-refresh = "hudl_mcp.auth_refresh:main"
+hudl-test = "hudl_mcp.test_connection:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hudl_mcp"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

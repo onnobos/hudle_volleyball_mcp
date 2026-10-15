@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "hudl-volleyball": {
+      "command": "/Users/onnobos/projects/hudle_mcp/.venv/bin/python",
+      "args": [
+        "-m",
+        "hudl_mcp.server"
+      ],
+      "cwd": "/Users/onnobos/projects/hudle_mcp",
+      "env": {
+        "PYTHONPATH": "/Users/onnobos/projects/hudle_mcp/src"
+      }
+    }
+  }
+}

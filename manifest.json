@@ -1,0 +1,59 @@
+{
+  "$schema": "https://raw.githubusercontent.com/anthropics/anthropic-quickstarts/main/computer-use-demo/mcp-bundle-schema.json",
+  "manifest_version": "0.4",
+  "name": "hudl-volleyball-mcp",
+  "version": "0.1.0",
+  "description": "Production-grade Model Context Protocol (MCP) server for Hudl and Balltime volleyball match breakdowns, player box scores, rotation analytics (P1-P6), and DataVolley (.dvw) touches.",
+  "author": {
+    "name": "Hudl Volleyball MCP Team"
+  },
+  "server": {
+    "type": "uv",
+    "entry_point": "src/hudl_mcp/server.py",
+    "mcp_config": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "${__dirname}",
+        "hudl-volleyball-mcp"
+      ],
+      "env": {
+        "HUDL_COOKIE": "${user_config.hudl_cookie}",
+        "HUDL_TEAM_ID": "${user_config.hudl_team_id}",
+        "HUDL_EMAIL": "${user_config.hudl_email}",
+        "HUDL_PASSWORD": "${user_config.hudl_password}"
+      }
+    }
+  },
+  "user_config": {
+    "hudl_cookie": {
+      "type": "string",
+      "title": "Hudl Session Cookie (Optional)",
+      "description": "Optional: Paste your Hudl 'ident' session cookie if you do not want to use interactive browser login.",
+      "sensitive": true,
+      "required": false
+    },
+    "hudl_team_id": {
+      "type": "string",
+      "title": "Default Team ID (Optional)",
+      "description": "Optional default Hudl Team ID. If omitted, the server automatically auto-discovers your team.",
+      "sensitive": false,
+      "required": false
+    },
+    "hudl_email": {
+      "type": "string",
+      "title": "Hudl Account Email (Optional)",
+      "description": "Optional: Hudl account email if using headless automated cookie refresh.",
+      "sensitive": false,
+      "required": false
+    },
+    "hudl_password": {
+      "type": "string",
+      "title": "Hudl Account Password (Optional)",
+      "description": "Optional: Hudl account password for headless automated cookie refresh.",
+      "sensitive": true,
+      "required": false
+    }
+  }
+}
